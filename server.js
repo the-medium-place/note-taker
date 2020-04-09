@@ -5,11 +5,12 @@ const fs = require("fs");
 
 // express app
 const app = express();
-const PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // express happ handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
 
 
