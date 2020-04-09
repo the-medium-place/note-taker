@@ -13,43 +13,13 @@ app.use(express.json());
 
 
 
-
-
-
-
-
-
-
-
-
-
 // HTML routes
-
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"))
-});
-
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "./public/notes.html"));
-});
-
+const htmlRoutes = require("./routes/htmlRoutes");
+app.use(htmlRoutes);
 
 // data routes
-
-app.get("/api/notes", (req, res) => {
-    res.send("api test success");
-    // const db = fs.readFile(path.join(__dirname, "./db/db.json"), err => !err ? console.log("Success") : console.log(err));
-    // console.log(db);
-    // res.send(db);
-
-});
-
-
-
-
-
-
-
+const apiRoutes = require("./routes/apiRoutes");
+app.use(apiRoutes);
 
 // start server, begin listening
 app.listen(PORT, function() {
