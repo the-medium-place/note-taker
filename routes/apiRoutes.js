@@ -57,12 +57,12 @@ router.post("/api/notes", (req, res) => {
 
 
 router.delete("/api/notes/:id", (req,res) => {
-    const choice = req.params.id;
+    // const choice = req.params.id;
     fs.readFile(path.join(__dirname, "../db/db.json"), "utf8", (err, data) => {
 
         if (err) throw err;
 
-        const userData = [];
+        let userData = [];
 
         data = JSON.parse(data);
         console.log(data);
@@ -74,6 +74,12 @@ router.delete("/api/notes/:id", (req,res) => {
             }
         }
         console.log("after for loop" + userData);
+        userData = JSON.stringify(userData);
+
+        fs.writeFile(path.join(__dirname, "../db/db.json"), userData, (err, response) => {
+            if (err) throw err;
+            res.json({ ok: true });
+        })
         
 
 
